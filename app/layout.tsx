@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   creator: "Swayam Swarup Panda",
   publisher: "Contrast Studio",
   category: "accessibility",
-  metadataBase: new URL("https://contrast.swayam.dev"),
+  metadataBase: new URL("https://color-contrast-checker-six.vercel.app/"),
   robots: {
     index: true,
     follow: true,
@@ -34,12 +34,12 @@ export const metadata: Metadata = {
     title: "Color Contrast Checker – Free WCAG 2.1 AA/AAA Tool",
     description:
       "Check if your text and background colors pass WCAG standards. Ensure accessible web design with our free contrast checker.",
-    url: "https://contrast.swayam.dev",
-    siteName: "Contrast Studio",
+    url: "https://color-contrast-checker-six.vercel.app/",
+    siteName: "Color Contrast Checker",
     type: "website",
     images: [
       {
-        url: "https://contrast.swayam.dev/og-image.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Color Contrast Checker by Contrast Studio",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     description:
       "Test your color combinations for accessibility with our free online contrast checker. Built for designers and developers.",
     creator: "@Swayam_Dev",
-    images: ["https://contrast.swayam.dev/og-image.png"],
+    images: ["/og-image.png"],
   },
   generator: "Next.js 15, Tailwind CSS, ChatGPT SEO Optimized",
 };
@@ -78,7 +78,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
-        <link rel="canonical" href="https://contrast.swayam.dev" />
+        <link
+          rel="canonical"
+          href="https://color-contrast-checker-six.vercel.app/"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -86,7 +89,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebApplication",
               name: "Color Contrast Checker",
-              url: "https://contrast.swayam.dev",
+              url: "https://color-contrast-checker-six.vercel.app/",
               applicationCategory: "Accessibility Tool",
               description:
                 "Test your color contrast ratios online to meet WCAG 2.1 standards. Free, fast, and accessible.",

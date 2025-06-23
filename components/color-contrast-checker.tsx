@@ -218,7 +218,7 @@ export function ColorContrastChecker() {
   };
 
   const getContrastLevel = (ratio: number) => {
-    if (ratio >= 7) return { level: "AAA", color: "bg-emerald-500" };
+    if (ratio >= 7) return { level: "AAA", color: "bg-green-800" };
     if (ratio >= 4.5) return { level: "AA", color: "bg-blue-500" };
     if (ratio >= 3) return { level: "AA Large", color: "bg-amber-500" };
     return { level: "Fail", color: "bg-red-500" };
@@ -357,8 +357,8 @@ export function ColorContrastChecker() {
             >
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
               <div className="text-center z-10">
-                <Palette className="h-6 w-6 mx-auto mb-2 text-slate-600/70" />
-                <span className="text-sm text-slate-600/70 font-medium">
+                <Palette className="h-6 w-6 mx-auto mb-2 text-gray-700" />
+                <span className="text-sm text-gray-700 font-medium">
                   Click to pick color
                 </span>
               </div>
@@ -558,6 +558,7 @@ export function ColorContrastChecker() {
                   </Label>
                   <Select value={selectedFont} onValueChange={setSelectedFont}>
                     <SelectTrigger
+                      id="font-select"
                       className="w-full"
                       aria-label="Google Font Selector"
                     >
