@@ -1,38 +1,33 @@
-"use client"
-
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Moon, Sun } from "lucide-react"
+"use client";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { Moon, Sun } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("light")
-
-  useEffect(() => {
-    // Check for saved theme preference or default to light
-    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-    const initialTheme = savedTheme || (prefersDark ? "dark" : "light")
-
-    setTheme(initialTheme)
-    document.documentElement.classList.toggle("dark", initialTheme === "dark")
-  }, [])
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light"
-    setTheme(newTheme)
-    localStorage.setItem("theme", newTheme)
-    document.documentElement.classList.toggle("dark", newTheme === "dark")
-  }
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return <div className="w-9 h-9" />;
 
   return (
-    <Button
-      variant="outline"
-      size="sm"
-      onClick={toggleTheme}
-      className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border-white/20 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-200"
-      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+    <button
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      aria-label="Toggle theme"
+      className="relative w-9 h-9 rounded-xl flex items-center justify-center transition-colors hover:bg-[var(--bg-secondary)] border border-[var(--border)]"
+      style={{ color: "var(--text-secondary)" }}
     >
-      {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-    </Button>
-  )
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={theme}
+          initial={{ scale: 0.6, opacity: 0, rotate: -30 }}
+          animate={{ scale: 1, opacity: 1, rotate: 0 }}
+          exit={{ scale: 0.6, opacity: 0, rotate: 30 }}
+          transition={{ duration: 0.2 }}
+        >
+          {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+        </motion.div>
+      </AnimatePresence>
+    </button>
+  );
 }

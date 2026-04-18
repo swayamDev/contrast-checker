@@ -1,111 +1,43 @@
-import type React from "react";
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
-  title: "Color Contrast Checker – Free WCAG 2.1 AA/AAA Compliance Tool",
-  description:
-    "Test your color contrast ratios online to meet WCAG 2.1 AA and AAA standards. Instantly check text readability, accessibility, and color compliance.",
-  keywords:
-    "color contrast checker, accessibility checker, WCAG 2.1, contrast ratio tool, color accessibility, a11y, color readability, online contrast tool",
-  authors: [
-    { name: "Swayam Swarup Panda", url: "https://swayam-nine.vercel.app/" },
-  ],
-  creator: "Swayam Swarup Panda",
-  publisher: "Contrast Studio",
-  category: "accessibility",
-  metadataBase: new URL("https://color-contrast-checker-six.vercel.app/"),
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
-  openGraph: {
-    title: "Color Contrast Checker – Free WCAG 2.1 AA/AAA Tool",
-    description:
-      "Check if your text and background colors pass WCAG standards. Ensure accessible web design with our free contrast checker.",
-    url: "https://color-contrast-checker-six.vercel.app/",
-    siteName: "Color Contrast Checker",
-    type: "website",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Color Contrast Checker by Contrast Studio",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Color Contrast Checker – Free WCAG 2.1 AA/AAA Tool",
-    description:
-      "Test your color combinations for accessibility with our free online contrast checker. Built for designers and developers.",
-    creator: "@Swayam_Dev",
-    images: ["/og-image.png"],
-  },
-  generator: "Next.js 15, Tailwind CSS, ChatGPT SEO Optimized",
+  title: "Contrast Studio – WCAG Color Contrast Checker",
+  description: "Professional WCAG 2.2 color contrast checker. Test AA/AAA compliance, simulate color blindness, preview live text, and save palettes.",
+  keywords: "color contrast checker, WCAG 2.2, accessibility, a11y, contrast ratio",
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f8f8f6" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f0f0e" },
+  ],
 };
 
-// ✅ Correct usage for theme color (must be outside metadata)
-export const themeColor = [
-  { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-  { media: "(prefers-color-scheme: dark)", color: "#0f172a" }, // slate-900
-];
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          rel="canonical"
-          href="https://color-contrast-checker-six.vercel.app/"
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebApplication",
-              name: "Color Contrast Checker",
-              url: "https://color-contrast-checker-six.vercel.app/",
-              applicationCategory: "Accessibility Tool",
-              description:
-                "Test your color contrast ratios online to meet WCAG 2.1 standards. Free, fast, and accessible.",
-              author: {
-                "@type": "Person",
-                name: "Swayam Swarup Panda",
-                url: "https://swayam-nine.vercel.app/",
-              },
-            }),
-          }}
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+          rel="stylesheet"
         />
       </head>
-      <body
-        className={`${inter.className} antialiased bg-white text-black dark:bg-slate-900 dark:text-white`}
-      >
-        {children}
+      <body className="antialiased">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
